@@ -14,4 +14,11 @@ vim.o.relativenumber = true
 
 vim.keymap.set('n', '<leader>ga', ':silent !git add %<cr>', {noremap=true})
 vim.keymap.set('n', '<leader>gg', ':silent !git add %<cr>', {noremap=true})
-vim.keymap.set('n', '<leader>gs', ':term git status -s<cr>', {noremap=true})
+vim.keymap.set('n', '<leader>gs', ':term git status<cr>', {noremap=true})
+
+vim.api.nvim_create_autocmd('BufRead', {
+  pattern = { '.commit-stash' },
+  callback = function()
+    vim.opt.filetype = 'gitcommit'
+  end
+})
