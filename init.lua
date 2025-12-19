@@ -11,3 +11,6 @@ end, {})
 
 vim.g.netrw_liststyle = 3
 vim.o.relativenumber = true 
+
+vim.keymap.set('n', '<leader>ga', ':silent !git add %<cr>', {noremap=true})
+vim.keymap.set('n', '<leader>gs', ':term git status -s<cr>', {noremap=true})
