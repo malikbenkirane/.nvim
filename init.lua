@@ -12,13 +12,19 @@ end, {})
 vim.g.netrw_liststyle = 3
 vim.o.relativenumber = true 
 
-vim.keymap.set('n', '<leader>ga', ':silent !git add %<cr>', {noremap=true})
-vim.keymap.set('n', '<leader>gg', ':silent !git add %<cr>', {noremap=true})
-vim.keymap.set('n', '<leader>gs', ':term git status<cr>', {noremap=true})
-
 vim.api.nvim_create_autocmd('BufRead', {
   pattern = { '.commit-stash' },
   callback = function()
     vim.opt.filetype = 'gitcommit'
   end
 })
+
+local function set_title()
+	vim.opt.title = true
+	local cwd = vim.fn.getcwd()
+	local last = vim.fn.fnamemodify(cwd, ":t")
+	local parent = vim.fn.fnamemodify(cwd, ":h:t")
+	vim.opt.titlestring = parent.."/"..last
+end
+
+set_title()
